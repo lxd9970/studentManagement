@@ -1,9 +1,11 @@
 <template>
+     <!-- 主页面框架 -->
+
     <div>
         <div class="add-box">
           <el-button @click="jumpToAddPage()" type="primary" size="small" icon="el-icon-circle-plus-outline">新增</el-button>
           <el-button @click="jumpTocheckPage()" type="primary" icon="el-icon-search" size="small">id查询</el-button>
-          <el-button @click="jumpToStatistics()" type="primary" icon="el-icon-search" size="small">eChars数据统计</el-button>
+          <!-- <el-button @click="jumpToStatistics()" type="primary" icon="el-icon-search" size="small">eChars数据统计</el-button> -->
           <el-input v-model="checkname" placeholder="请输入姓名" style="width:200px" maxlength="4" show-word-limit @keydown.enter.native="passname(checkname)"></el-input>
         </div>
          

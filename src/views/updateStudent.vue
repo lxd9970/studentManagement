@@ -1,4 +1,6 @@
 <template>
+<!-- 修改页面 -->
+
   <el-form ref="studentForm" :model="studentForm"  label-width="100px" style="width:300px;margin-left:40%">
   
      <el-form-item label="ID">

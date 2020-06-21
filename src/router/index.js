@@ -7,6 +7,8 @@ import byStudentName from '../views/byStudentName.vue'
 import byStudentId from '../views/byStudentId.vue'
 import eChars from '../views/eChars.vue'
 
+
+//路由模块
 Vue.use(VueRouter)
 
 const routes = [{
@@ -43,29 +45,6 @@ const routes = [{
         name: 'eChars',
         component: eChars
     },
-    // {
-    //     path: '/img/upload/:id',
-    //     name: 'uploadimg',
-    //     component: uploadimg
-    // },
-    // {
-    //     path: '/file/upload/:id',
-    //     name: 'uploadfile',
-    //     component: uploadfile
-    // },
-    // {
-    //   path: '/',
-    //   name: 'Home',
-    //   component: Home
-    // },
-    // {
-    //   path: '/about',
-    //   name: 'About',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (about.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-    // }
 ]
 
 const router = new VueRouter({

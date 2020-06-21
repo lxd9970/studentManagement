@@ -1,9 +1,9 @@
 <template>
+
+  <!-- 通过ID查询 -->
   <el-form ref="studentForm" :model="studentForm" :rules="rules" label-width="100px" style="width:300px;margin-left:40%">
-    
     <el-upload
   class="avatar-uploader"
-  action="http://127.0.0.1:8080/file/upload2"
   :show-file-list="false"
   <!-- :on-success="handleAvatarSuccess"
   :before-upload="beforeAvatarUpload"> -->

@@ -1,4 +1,5 @@
 <template>
+  <!-- 添加学生页面 -->
 
   <el-form ref="studentForm" :model="studentForm" :rules="rules" label-width="100px" style="width:300px;margin-left:40%">
      <el-form-item label="ID" prop="id">
@@ -151,7 +152,7 @@
                     });
             },
             jumpToList() {
-                this.$router.push('/api/student/studentList')
+                this.$router.push('/student/studentList')
             },
 
         },
