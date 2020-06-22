@@ -3,9 +3,7 @@
 
     <div>
         <div class="add-box">
-          <el-button @click="jumpToAddPage()" type="primary" size="small" icon="el-icon-circle-plus-outline">新增</el-button>
-          <el-button @click="jumpTocheckPage()" type="primary" icon="el-icon-search" size="small">id查询</el-button>
-          <!-- <el-button @click="jumpToStatistics()" type="primary" icon="el-icon-search" size="small">eChars数据统计</el-button> -->
+          <el-button @click="jumpToAddPage()" type="primary" size="small" icon="el-icon-circle-plus-outline">新增</el-button>        
           <el-input v-model="checkname" placeholder="请输入姓名" style="width:200px" maxlength="4" show-word-limit @keydown.enter.native="passname(checkname)"></el-input>
         </div>
          
@@ -24,37 +22,12 @@
                 <el-button type="primary" plain="" @click="passid(scope.row.id)" size="small" icon="el-icon-edit">编辑</el-button>
                 <el-button type="danger" plain="" @click="deleteStudent(scope.row.id)" size="small" icon="el-icon-delete">删除</el-button>
               </template>
+
 </el-table-column>
 
-
-<!-- <el-table-column label="头像上传" width="100">
-    <template slot-scope="scope">                
-                
-                <el-button type="primary" plain="" @click="passimgid(scope.row.id)" size="small" icon="el-icon-edit">上传</el-button>
-               
-                
-              </template>
-</el-table-column>
-
-<el-table-column label="简历上传" width="100">
-    <template slot-scope="scope">                
-                
-                <el-button type="primary" plain="" @click="passurlid(scope.row.id)" size="small" icon="el-icon-edit">上传</el-button>
-               
-                
-              </template>
-</el-table-column>
-
-<el-table-column label="下载" width="100">
-    <template slot-scope="scope" v-if="scope.row.fileUrl">                
-                
-                 <el-button type="primary" plain="" @click="download(scope.row.fileUrl)" size="small" icon="el-icon-edit">下载</el-button>
-               
-              </template>
-</el-table-column> -->
 </el-table>
 
-<el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentpage" :page-sizes="[1, 2, 4, 8]" :page-size="pagesize" layout="total, sizes, prev, pager, next, jumper" :total="students.length">
+<el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentpage" :page-sizes="[4,8,16]" :page-size="pagesize" layout="total, sizes, prev, pager, next, jumper" :total="students.length">
 </el-pagination>
 </div>
 </template>
@@ -62,11 +35,11 @@
     import {
         formatDate
     } from '../components/common/date.js'
-
+    //引入日期格式化模块
     import {
         getHomeMultidata
     } from '../network/home.js'
-    //引入日期格式化模块
+    //引入网络封装模块
     export default {
         name: "home",
         components: {
@@ -76,7 +49,7 @@
             return {
                 checkname: "",
                 currentpage: 1,
-                pagesize: 4,
+                pagesize: 20,
                 students: [],
                 currrentstudent: [],
 
@@ -101,12 +74,6 @@
 
                 this.currentpage = val;
                 this.getcurrentstudent();
-            },
-            jumpToStatistics() {
-                this.$router.push({
-                    name: 'eChars',
-
-                })
             },
             getcurrentstudent() {
                 var begin = this.currentpage * this.pagesize - this.pagesize;
@@ -139,16 +106,39 @@
             },
 
             deleteStudent(id) {
-                this.$axios
-                    .get('/api/student/deletebyid?id=' + id)
-                    .then(res => {
-                        this.getAllStudent()
-                        alert("删除成功")
-                    })
-                    .catch(err => {
-                        alert("删除失败")
-                        console.log(err);
+                // this.$axios
+                //     .get('/api/student/deletebyid?id=' + id)
+                //     .then(res => {
+                //         this.getAllStudent()
+                //         alert("删除成功")
+                //     })
+                //     .catch(err => {
+                //         alert("删除失败")
+                //         console.log(err);
+                //     });
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$axios
+                        .get('/api/student/deletebyid?id=' + id)
+                        .then(res => {
+                            this.getAllStudent()
+                        })
+                        .catch(err => {
+                            alert("删除失败")
+                        });
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!',
                     });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
             },
             jumpToAddPage() {
                 this.$router.push({
@@ -171,29 +161,32 @@
                     }
                 })
             },
-            passurlid(id) {
-                this.$router.push({
-                    name: 'uploadfile',
-                    params: {
-                        id: id
-                    }
-                })
-            },
-            passimgid(id) {
-                this.$router.push({
-                    name: 'uploadimg',
-                    params: {
-                        id: id
-                    }
-                })
-            },
             passname(name) {
-                this.$router.push({
-                    name: 'byStudentName',
-                    params: {
-                        name: name
-                    }
-                })
+                if (typeof(this.checkname) === Number) {
+                    console.log(this.checkname);
+
+                    this.$router.push({
+                        name: 'byStudentId',
+                        params: {
+                            id: id
+                        }
+                    })
+                } else {
+                    console.log(this.checkname);
+
+                    this.$router.push({
+                        name: 'byStudentName',
+                        params: {
+                            name: name
+                        }
+                    })
+                }
+                // this.$router.push({
+                //     name: 'byStudentName',
+                //     params: {
+                //         name: name
+                //     }
+                // })
             },
             download(url) {
                 window.location.href = url;

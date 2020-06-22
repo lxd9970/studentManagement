@@ -4,8 +4,6 @@ import Home from '../views/Home.vue'
 import addStudent from '../views/addStudent.vue'
 import updateStudent from '../views/updateStudent.vue'
 import byStudentName from '../views/byStudentName.vue'
-import byStudentId from '../views/byStudentId.vue'
-import eChars from '../views/eChars.vue'
 
 
 //路由模块
@@ -25,11 +23,7 @@ const routes = [{
         name: 'addStudent',
         component: addStudent
     },
-    {
-        path: '/student/byStudentId',
-        name: 'byStudentId',
-        component: byStudentId
-    },
+
     {
         path: '/student/updateStudent/:id',
         name: 'updateStudent',
@@ -39,11 +33,6 @@ const routes = [{
         path: '/student/byStudentName/:name',
         name: 'byStudentName',
         component: byStudentName
-    },
-    {
-        path: '/eChars',
-        name: 'eChars',
-        component: eChars
     },
 ]
 

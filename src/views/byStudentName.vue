@@ -49,6 +49,19 @@
                         console.log(err);
                     });
             },
+            findById(id) {
+                this.$axios
+                    .get('/api/student/findbyid?id=' + id)
+                    .then(res => {
+                        this.studentsId = res.data
+                        console.log(res.data);
+
+                    })
+                    .catch(err => {
+                        alert("查找失败");
+                        console.log(err);
+                    });
+            },
             deleteStudent(id) {
                 this.$axios
                     .get('/api/student/deletebyid?id=' + id)
@@ -76,22 +89,28 @@
             },
             passid(id) {
                 this.$router.push({
-                    name: 'update',
+                    name: 'updateStudent',
                     params: {
                         id: id
                     }
                 })
             },
         },
-        mounted() {
+        created() {
             if (this.$route.params.name != undefined) {
                 this.findbyname(this.$route.params.name)
-                console.log(this.students);
+
+
 
             }
-            if (this.$route.params.id != undefined) {
-                this.check(this.$route.params.id)
-            }
+            // if (typeof(this.$route.params.name) === String) {
+            //     this.findbyname(this.$route.params.name)
+            // }
+            // if (this.$route.params.id != undefined) {
+            //     this.findById(this.$route.params.id)
+            //     console.log(this.$route.params.id);
+
+            // }
         }
     }
 </script>

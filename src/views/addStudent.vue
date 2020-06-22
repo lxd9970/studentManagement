@@ -145,6 +145,7 @@
                     .then(res => {
                         this.studentForm = {}
                         this.jumpToList()
+                        alert("添加成功")
                     })
                     .catch(err => {
                         alert("添加失败");
