@@ -2,8 +2,6 @@
   <div id="app">
       <div class="hone">
     <h2 class="student">学生管理系统</h2>
-    <!-- <router-link to="eChars" class="eChars">eChars</router-link> -->
-  <!-- <home></home> -->
   <div class="router">
   <router-view />
 </div>

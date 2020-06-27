@@ -93,7 +93,7 @@
                 this.currrentstudent = temp;
 
             },
-
+            //获取所有学生信息
             getAllStudent() {
                 this.$axios.get("/api/student/findAllStudents")
                     .then(res => {
@@ -104,19 +104,9 @@
                         console.log(err);
                     });
             },
-
+            //删除按钮模态框
             deleteStudent(id) {
-                // this.$axios
-                //     .get('/api/student/deletebyid?id=' + id)
-                //     .then(res => {
-                //         this.getAllStudent()
-                //         alert("删除成功")
-                //     })
-                //     .catch(err => {
-                //         alert("删除失败")
-                //         console.log(err);
-                //     });
-                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                this.$confirm('此操作将永久删除该学生信息, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'

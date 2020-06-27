@@ -36,13 +36,11 @@
                 this.$router.push('/student/studentList')
             },
             findbyname(name) {
-
                 this.$axios
                     .get('/api/student/findbyname?name=' + name)
                     .then(res => {
                         this.students = res.data
                         console.log(this.students);
-
                     })
                     .catch(err => {
                         alert("查找失败");

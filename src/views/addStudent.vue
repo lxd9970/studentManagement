@@ -18,7 +18,6 @@
     </el-form-item>
 
     <el-form-item label="年级" prop="grade">
-      <!-- <el-input-number v-model="studentForm.grade" style="width:240px;"></el-input-number> -->
       <el-select v-model="studentForm.grade" placeholder="请选择年级" style="width:240px;">
         <el-option label="2016" value="2016"></el-option>
         <el-option label="2017" value="2017"></el-option>
@@ -139,12 +138,14 @@
             submit() {
                 this.addStudent()
             },
+            //添加学生网络请求
             addStudent() {
                 this.$axios
                     .post("/api/student/addStudent", this.studentForm)
                     .then(res => {
                         this.studentForm = {}
                         this.jumpToList()
+                            //添加成功跳转到默认界面
                         alert("添加成功")
                     })
                     .catch(err => {

@@ -108,6 +108,7 @@
             if (this.$route.params.id != undefined) {
                 this.check(this.$route.params.id)
             }
+
         }
     }
 </script>
